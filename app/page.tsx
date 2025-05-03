@@ -1,14 +1,12 @@
-import Hello from "./components/hello";
+import React from "react";
 
-export default function Home() {
-  
-  console.log("what am i doing here CLIENT/SERVER")
-
-
+export default function HomePage() {
   return (
-   <>
-      <h1 className="text-3xl font-bold underline">welcome nextjs</h1>
-      <Hello/>
-   </>
+    <div className="container mx-auto px-4">
+      <h1 className="text-3xl font-bold">Selamat Datang di Toko Online Kami</h1>
+      <p className="mt-4">
+        Temukan berbagai produk berkualitas dengan harga terbaik
+      </p>
+    </div>
   );
 }
