@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,10 +14,12 @@ export default function RootLayout({
   children,
   team,
   analytics,
+  auth,
 }: {
   children: React.ReactNode;
   team: React.ReactNode;
   analytics: React.ReactNode;
+  auth: React.ReactNode;
 }) {
   return (
     <html lang="id">
@@ -27,6 +30,23 @@ export default function RootLayout({
           </header>
 
           <main className="container mx-auto py-8 px-4">
+            <div className="mb-4">
+              <Link
+                href="/login"
+                style={{
+                  background: "#0070f3",
+                  color: "#fff",
+                  padding: "8px 16px",
+                  borderRadius: 4,
+                  textDecoration: "none",
+                }}
+              >
+                Buka Modal Login
+              </Link>
+            </div>
+
+            {auth}
+
             <div className="mb-8">{children}</div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
