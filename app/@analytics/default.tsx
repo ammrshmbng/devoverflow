@@ -1,14 +1,22 @@
-import React from "react";
+"use client";
 
-const DefaultAnalytics = () => {
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+// Komponen ini akan dirender ketika tidak ada halaman spesifik yang dipilih
+// Ini akan mengarahkan pengguna ke tab page-views secara otomatis
+export default function DefaultAnalytics() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Arahkan ke tab page-views secara otomatis
+    router.push("/page-views");
+  }, [router]);
+
+  // Tampilkan pesan loading selama redirect
   return (
-    <div className="p-4 bg-purple-50 rounded-md border border-purple-200 text-center">
-      <p className="text-purple-700">Data analitik tidak tersedia saat ini.</p>
-      <button className="mt-2 px-4 py-2 bg-purple-500 text-white rounded-md text-sm">
-        Muat Data Analitik
-      </button>
+    <div className="p-4 text-center">
+      <p className="text-sm text-gray-600">Memuat data analitik...</p>
     </div>
   );
-};
-
-export default DefaultAnalytics;
+}

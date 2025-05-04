@@ -5,8 +5,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Parallel Routes Demo",
-  description: "Demo aplikasi parallel routes di Next.js",
+  title: "Tab Groups Demo",
+  description: "Demo aplikasi tab groups dengan parallel routes di Next.js",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="min-h-screen bg-gray-100">
           <header className="bg-blue-600 text-white p-4">
-            <h1 className="text-xl font-bold">Parallel Routes Demo</h1>
+            <h1 className="text-xl font-bold">Tab Groups Demo</h1>
           </header>
 
           <main className="container mx-auto py-8 px-4">
@@ -35,12 +35,7 @@ export default function RootLayout({
                 {team}
               </div>
 
-              <div className="bg-purple-100 p-4 rounded-lg border border-purple-200">
-                <h2 className="text-purple-800 font-bold mb-2">
-                  Analytics Section
-                </h2>
-                {analytics}
-              </div>
+              <div>{analytics}</div>
             </div>
           </main>
         </div>
