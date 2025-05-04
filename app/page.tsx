@@ -24,6 +24,16 @@ export default function Home() {
               Lihat demo Intercepting Routes dengan galeri foto
             </p>
           </Link>
+
+          <a
+            href="/examples/intercepting-routes"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+          >
+            <h3 className="text-2xl font-bold">Contoh Lengkap &rarr;</h3>
+            <p className="mt-4 text-xl">
+              Lihat demo semua jenis Intercepting Routes (., .., ..(..), ...)
+            </p>
+          </a>
         </div>
       </main>
     </div>
