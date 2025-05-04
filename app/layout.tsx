@@ -1,39 +1,49 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-const inter = localFont({
-  src: "./fonts/InterVF.ttf",
-  variable: "--font-inter",
-  weight: "100 200 300 400 500 700 800 900",
-});
-
-const spaceGrotesk = localFont({
-  src: "./fonts/SpaceGroteskVF.ttf",
-  variable: "--font-space-grotesk",
-  weight: "300 400 500 700",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DevFlow",
-  description:
-    "A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.",
-  icons: {
-    icon: "/images/site-logo.svg",
-  },
+  title: "Parallel Routes Demo",
+  description: "Demo aplikasi parallel routes di Next.js",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  team,
+  analytics,
+}: {
   children: React.ReactNode;
-}>) {
+  team: React.ReactNode;
+  analytics: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} ${spaceGrotesk.variable} antialiased`}
-      >
-        {children}
+    <html lang="id">
+      <body className={inter.className}>
+        <div className="min-h-screen bg-gray-100">
+          <header className="bg-blue-600 text-white p-4">
+            <h1 className="text-xl font-bold">Parallel Routes Demo</h1>
+          </header>
+
+          <main className="container mx-auto py-8 px-4">
+            <div className="mb-8">{children}</div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-blue-100 p-4 rounded-lg border border-blue-200">
+                <h2 className="text-blue-800 font-bold mb-2">Team Section</h2>
+                {team}
+              </div>
+
+              <div className="bg-purple-100 p-4 rounded-lg border border-purple-200">
+                <h2 className="text-purple-800 font-bold mb-2">
+                  Analytics Section
+                </h2>
+                {analytics}
+              </div>
+            </div>
+          </main>
+        </div>
       </body>
     </html>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold">Selamat Datang di Toko Online Kami</h1>
-      <p className="mt-4">
-        Temukan berbagai produk berkualitas dengan harga terbaik
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Halaman Utama</h1>
+      <p>
+        Ini adalah halaman utama yang akan menampilkan slot parallel routes.
       </p>
     </div>
   );
