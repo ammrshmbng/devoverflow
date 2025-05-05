@@ -15,6 +15,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "next": "15.3.1",
+    "next-themes": "^0.4.6",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -32,5 +33,29 @@
     "eslint-plugin-import": "^2.31.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "packageManager": "npm@10.9.2",
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "eslint": "$eslint",
+    "eslint-config-prettier": "$eslint-config-prettier",
+    "eslint-config-standard": "$eslint-config-standard",
+    "eslint-plugin-n": "$eslint-plugin-n",
+    "eslint-plugin-promise": "$eslint-plugin-promise",
+    "eslint-plugin-tailwindcss": "$eslint-plugin-tailwindcss",
+    "next": "$next",
+    "prettier": "$prettier",
+    "tailwindcss-animate": "$tailwindcss-animate",
+    "tailwindcss": "$tailwindcss",
+    "typescript": "$typescript",
+    "@types/node": "$@types/node",
+    "@types/react": "$@types/react",
+    "@types/react-dom": "$@types/react-dom",
+    "eslint-config-next": "$eslint-config-next",
+    "eslint-plugin-import": "$eslint-plugin-import",
+    "@eslint/eslintrc": "$@eslint/eslintrc",
+    "@tailwindcss/postcss": "$@tailwindcss/postcss",
+    "@tailwindcss/typography": "$@tailwindcss/typography"
   }
 }
