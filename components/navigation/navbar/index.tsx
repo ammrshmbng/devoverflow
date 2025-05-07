@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import ROUTES from "@/constants/routes";
 
+import MobileNavigation from "./MobileNavigation";
 import Theme from "./Theme";
 
 const Navbar = async () => {
@@ -25,6 +26,7 @@ const Navbar = async () => {
 
       <div className="flex-between gap-5">
         <Theme />
+        <MobileNavigation />
       </div>
     </nav>
   );
