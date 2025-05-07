@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import ROUTES from "@/constants/routes";
-// import { cn } from "@/lib/utils";
+import { cn, getDeviconClassName, getTechDescription } from "@/lib/utils";
 
 import { Badge } from "../ui/badge";
 
@@ -32,11 +32,14 @@ const TagCard = ({
     e.preventDefault();
   };
 
+  const iconClass = getDeviconClassName(name);
+  const iconDescription = getTechDescription(name);
+
   const Content = (
     <>
       <Badge className="subtle-medium background-light800_dark300 text-light400_light500 flex flex-row gap-2 rounded-md border-none px-4 py-2 uppercase">
         <div className="flex-center space-x-2">
-          {/* <i className={`${iconClass} text-sm`}></i> */}
+          <i className={`${iconClass} text-sm`}></i>
           <span>{name}</span>
         </div>
 
@@ -77,11 +80,11 @@ const TagCard = ({
           <div className="background-light800_dark400 w-fit rounded-sm px-5 py-1.5">
             <p className="paragraph-semibold text-dark300_light900">{name}</p>
           </div>
-          {/* <i className={cn(iconClass, "text-2xl")} aria-hidden="true" /> */}
+          <i className={cn(iconClass, "text-2xl")} aria-hidden="true" />
         </div>
 
         <p className="small-regular text-dark500_light700 mt-5 line-clamp-3 w-full">
-          {/* {iconDescription} */}
+          {iconDescription}
         </p>
 
         <p className="small-medium text-dark400_light500 mt-3.5">
