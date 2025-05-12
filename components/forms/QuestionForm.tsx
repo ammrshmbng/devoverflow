@@ -2,14 +2,16 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MDXEditorMethods } from "@mdxeditor/editor";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import dynamic from "next/dynamic";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import ROUTES from "@/constants/routes";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { AskQuestionSchema } from "@/lib/validations";
 
 import TagCard from "../cards/TagCard";
@@ -25,8 +27,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 
-// import { createQuestion, editQuestion } from "@/lib/actions/question.action";
-
 const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
 });
@@ -39,6 +39,7 @@ interface Params {
 const QuestionForm = ({ question, isEdit = false }: Params) => {
   const editorRef = useRef<MDXEditorMethods>(null);
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof AskQuestionSchema>>({
     resolver: zodResolver(AskQuestionSchema),
@@ -94,40 +95,38 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
   ) => {
     startTransition(async () => {
       if (isEdit && question) {
-        // const result = await editQuestion({
-        //   questionId: question?._id,
-        //   ...data,
-        // });
-        // if (result.success) {
-        //   toast("Question updated successfully");
-        //   if (result.data) router.push(ROUTES.QUESTION(result.data._id));
-        // } else {
-        //   // toast({
-        //   //   title: `Error ${result.status}`,
-        //   //   description: result.error?.message || "Something went wrong",
-        //   //   variant: "destructive",
-        //   // });
-        //   toast("Something went wrong");
-        // }
-        // return;
+        const result = await editQuestion({
+          questionId: question?._id,
+          ...data,
+        });
+        if (result.success) {
+          toast("Question updated successfully");
+          // if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+        } else {
+          // toast({
+          //   title: `Error ${result.status}`,
+          //   description: result.error?.message || "Something went wrong",
+          //   variant: "destructive",
+          // });
+          toast("Something went wrong");
+        }
       }
 
-      // const result = await createQuestion(data);
+      const result = await createQuestion(data);
 
-      // if (result.success) {
-      //   toast("Question created successfully");
+      if (result.success) {
+        toast("Question created successfully");
 
-      //   if (result.data) router.push(ROUTES.QUESTION(result.data._id));
-      // } else {
-      //   // toast({
-      //   //   title: `Error ${result.status}`,
-      //   //   description: result.error?.message || "Something went wrong",
-      //   //   variant: "destructive",
-      //   // });
+        if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+      } else {
+        // toast({
+        //   title: `Error ${result.status}`,
+        //   description: result.error?.message || "Something went wrong",
+        //   variant: "destructive",
+        // });
 
-      //   toast("Something went wrong");
-
-      // }
+        toast("Something went wrong");
+      }
     });
   };
 
@@ -229,15 +228,14 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
             disabled={isPending}
             className="primary-gradient w-fit !text-light-900"
           >
-            {/* {isPending ? (
+            {isPending ? (
               <>
                 <ReloadIcon className="mr-2 size-4 animate-spin" />
                 <span>Submitting</span>
               </>
             ) : (
               <>{isEdit ? "Edit" : "Ask a Question"}</>
-            )} */}
-            Ask a Question
+            )}
           </Button>
         </div>
       </form>
