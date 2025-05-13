@@ -44,9 +44,9 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
   const form = useForm<z.infer<typeof AskQuestionSchema>>({
     resolver: zodResolver(AskQuestionSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      tags: [],
+      title: question?.title || "",
+      content: question?.content || "",
+      tags: question?.tags.map((tag) => tag.name) || [],
     },
   });
 
@@ -101,7 +101,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
         });
         if (result.success) {
           toast("Question updated successfully");
-          // if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+          if (result.data) router.push(ROUTES.QUESTION(result.data._id));
         } else {
           // toast({
           //   title: `Error ${result.status}`,
@@ -110,6 +110,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
           // });
           toast("Something went wrong");
         }
+        return;
       }
 
       const result = await createQuestion(data);
