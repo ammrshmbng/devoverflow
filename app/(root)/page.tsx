@@ -2,17 +2,16 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import QuestionCard from "@/components/cards/QuestionCard";
+import DataRenderer from "@/components/DataRenderer";
+import CommonFilter from "@/components/filters/CommonFilter";
 import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import ROUTES from "@/constants/routes";
 import { EMPTY_QUESTION } from "@/constants/states";
-
-// import DataRenderer from "@/components/DataRenderer";
-// import CommonFilter from "@/components/filters/CommonFilter";
 // import Pagination from "@/components/Pagination";
-// import { getQuestions } from "@/lib/actions/question.action";
+import { getQuestions } from "@/lib/actions/question.action";
 
 export const metadata: Metadata = {
   title: "Dev Overflow | Home",
@@ -21,16 +20,16 @@ export const metadata: Metadata = {
 };
 
 async function Home({ searchParams }: RouteParams) {
-  // const { page, pageSize, query, filter } = await searchParams;
+  const { page, pageSize, query, filter } = await searchParams;
 
-  // const { success, data, error } = await getQuestions({
-  //   page: Number(page) || 1,
-  //   pageSize: Number(pageSize) || 10,
-  //   query,
-  //   filter,
-  // });
+  const { success, data, error } = await getQuestions({
+    page: Number(page) || 1,
+    pageSize: Number(pageSize) || 10,
+    query,
+    filter,
+  });
 
-  // const { questions, isNext } = data || {};
+  const { questions, isNext } = data || {};
 
   return (
     <>
@@ -55,16 +54,16 @@ async function Home({ searchParams }: RouteParams) {
           otherClasses="flex-1"
         />
 
-        {/* <CommonFilter
+        <CommonFilter
           filters={HomePageFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
           containerClasses="hidden max-md:flex"
-        /> */}
+        />
       </section>
 
       <HomeFilter />
 
-      {/* <DataRenderer
+      <DataRenderer
         success={success}
         error={error}
         data={questions}
@@ -76,7 +75,7 @@ async function Home({ searchParams }: RouteParams) {
             ))}
           </div>
         )}
-      /> */}
+      />
 
       {/* <Pagination page={page} isNext={isNext || false} /> */}
     </>
