@@ -28,12 +28,12 @@ const TagCard = ({
   isButton,
   handleRemove,
 }: Props) => {
+  const iconClass = getDeviconClassName(name);
+  const iconDescription = getTechDescription(name);
+
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
   };
-
-  const iconClass = getDeviconClassName(name);
-  const iconDescription = getTechDescription(name);
 
   const Content = (
     <>
