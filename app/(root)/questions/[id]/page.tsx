@@ -4,21 +4,20 @@ import { redirect } from "next/navigation";
 import { after } from "next/server";
 import React, { Suspense } from "react";
 
+import AllAnswers from "@/components/answers/AllAnswers";
 import TagCard from "@/components/cards/TagCard";
+import { Preview } from "@/components/editor/Preview";
+import AnswerForm from "@/components/forms/AnswerForm";
 import Metric from "@/components/Metric";
+import SaveQuestion from "@/components/questions/SaveQuestion";
 import UserAvatar from "@/components/UserAvatar";
+import Votes from "@/components/votes/Votes";
 import ROUTES from "@/constants/routes";
+import { getAnswers } from "@/lib/actions/answer.action";
+import { hasSavedQuestion } from "@/lib/actions/collection.action";
 import { getQuestion, incrementViews } from "@/lib/actions/question.action";
+import { hasVoted } from "@/lib/actions/vote.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
-
-// import AllAnswers from "@/components/answers/AllAnswers";
-// import { Preview } from "@/components/editor/Preview";
-// import AnswerForm from "@/components/forms/AnswerForm";
-// import SaveQuestion from "@/components/questions/SaveQuestion";
-// import Votes from "@/components/votes/Votes";
-// import { getAnswers } from "@/lib/actions/answer.action";
-// import { hasSavedQuestion } from "@/lib/actions/collection.action";
-// import { hasVoted } from "@/lib/actions/vote.action";
 
 export async function generateMetadata({
   params,
@@ -56,25 +55,25 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
 
   if (!success || !question) return redirect("/404");
 
-  // const {
-  //   success: areAnswersLoaded,
-  //   data: answersResult,
-  //   error: answersError,
-  // } = await getAnswers({
-  //   questionId: id,
-  //   page: Number(page) || 1,
-  //   pageSize: Number(pageSize) || 10,
-  //   filter,
-  // });
+  const {
+    success: areAnswersLoaded,
+    data: answersResult,
+    error: answersError,
+  } = await getAnswers({
+    questionId: id,
+    page: Number(page) || 1,
+    pageSize: Number(pageSize) || 10,
+    filter,
+  });
 
-  // const hasVotedPromise = hasVoted({
-  //   targetId: question._id,
-  //   targetType: "question",
-  // });
+  const hasVotedPromise = hasVoted({
+    targetId: question._id,
+    targetType: "question",
+  });
 
-  // const hasSavedQuestionPromise = hasSavedQuestion({
-  //   questionId: question._id,
-  // });
+  const hasSavedQuestionPromise = hasSavedQuestion({
+    questionId: question._id,
+  });
 
   const { author, createdAt, answers, views, tags, content, title } = question;
 
@@ -99,20 +98,20 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
 
           <div className="flex items-center justify-end gap-4">
             <Suspense fallback={<div>Loading...</div>}>
-              {/* <Votes
+              <Votes
                 targetType="question"
                 upvotes={question.upvotes}
                 downvotes={question.downvotes}
                 targetId={question._id}
                 hasVotedPromise={hasVotedPromise}
-              /> */}
+              />
             </Suspense>
 
             <Suspense fallback={<div>Loading...</div>}>
-              {/* <SaveQuestion
+              <SaveQuestion
                 questionId={question._id}
                 hasSavedQuestionPromise={hasSavedQuestionPromise}
-              /> */}
+              />
             </Suspense>
           </div>
         </div>
@@ -146,7 +145,7 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
         />
       </div>
 
-      {/* <Preview content={content} /> */}
+      <Preview content={content} />
 
       <div className="mt-8 flex flex-wrap gap-2">
         {tags.map((tag: Tag) => (
@@ -160,22 +159,22 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
       </div>
 
       <section className="my-5">
-        {/* <AllAnswers
+        <AllAnswers
           page={Number(page) || 1}
           isNext={answersResult?.isNext || false}
           data={answersResult?.answers}
           success={areAnswersLoaded}
           error={answersError}
           totalAnswers={answersResult?.totalAnswers || 0}
-        /> */}
+        />
       </section>
 
       <section className="my-5">
-        {/* <AnswerForm
+        <AnswerForm
           questionId={question._id}
           questionTitle={question.title}
           questionContent={question.content}
-        /> */}
+        />
       </section>
     </>
   );
