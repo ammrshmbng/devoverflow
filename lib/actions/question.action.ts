@@ -3,7 +3,6 @@
 import mongoose, { FilterQuery, Types } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { after } from "next/server";
-import { cache } from "react";
 
 import { auth } from "@/auth";
 import { Answer, Collection, Interaction, Vote } from "@/database";
@@ -23,6 +22,7 @@ import {
 
 import dbConnect from "../mongoose";
 import { createInteraction } from "./interaction.action";
+import { cache } from "react";
 
 export async function createQuestion(
   params: CreateQuestionParams

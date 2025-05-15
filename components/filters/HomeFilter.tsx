@@ -13,7 +13,6 @@ const filters = [
   { name: "Popular", value: "popular" },
   { name: "Unanswered", value: "unanswered" },
   { name: "Recommeded", value: "recommended" },
-  { name: "React", value: "React" },
 ];
 
 const HomeFilter = () => {

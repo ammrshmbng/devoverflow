@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { use, useState } from "react";
-import { toast } from "sonner";
 
+import { toast } from "@/hooks/use-toast";
 import { toggleSaveQuestion } from "@/lib/actions/collection.action";
 
 const SaveQuestion = ({
@@ -26,7 +26,10 @@ const SaveQuestion = ({
   const handleSave = async () => {
     if (isLoading) return;
     if (!userId)
-      return toast.error("You need to be logged in to save a question");
+      return toast({
+        title: "You need to be logged in to save a question",
+        variant: "destructive",
+      });
 
     setIsLoading(true);
 
@@ -35,11 +38,16 @@ const SaveQuestion = ({
 
       if (!success) throw new Error(error?.message || "An error occurred");
 
-      toast.success(
-        `Question ${data?.saved ? "saved" : "unsaved"} successfully`
-      );
+      toast({
+        title: `Question ${data?.saved ? "saved" : "unsaved"} successfully`,
+      });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "An error occurred");
+      toast({
+        title: "Error",
+        description:
+          error instanceof Error ? error.message : "An error occurred",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }

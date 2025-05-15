@@ -7,10 +7,10 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import ROUTES from "@/constants/routes";
+import { toast } from "@/hooks/use-toast";
 import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { AskQuestionSchema } from "@/lib/validations";
 
@@ -37,9 +37,9 @@ interface Params {
 }
 
 const QuestionForm = ({ question, isEdit = false }: Params) => {
+  const router = useRouter();
   const editorRef = useRef<MDXEditorMethods>(null);
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof AskQuestionSchema>>({
     resolver: zodResolver(AskQuestionSchema),
@@ -50,24 +50,11 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
     },
   });
 
-  const handleTagRemove = (tag: string, field: { value: string[] }) => {
-    const newTags = field.value.filter((t) => t !== tag);
-
-    form.setValue("tags", newTags);
-
-    if (newTags.length === 0) {
-      form.setError("tags", {
-        type: "manual",
-        message: "Tags are required",
-      });
-    }
-  };
-
   const handleInputKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     field: { value: string[] }
   ) => {
-    // console.log(field, e);
+    console.log(field, e);
     if (e.key === "Enter") {
       e.preventDefault();
       const tagInput = e.currentTarget.value.trim();
@@ -90,6 +77,19 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
     }
   };
 
+  const handleTagRemove = (tag: string, field: { value: string[] }) => {
+    const newTags = field.value.filter((t) => t !== tag);
+
+    form.setValue("tags", newTags);
+
+    if (newTags.length === 0) {
+      form.setError("tags", {
+        type: "manual",
+        message: "Tags are required",
+      });
+    }
+  };
+
   const handleCreateQuestion = async (
     data: z.infer<typeof AskQuestionSchema>
   ) => {
@@ -99,34 +99,40 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
           questionId: question?._id,
           ...data,
         });
+
         if (result.success) {
-          toast("Question updated successfully");
+          toast({
+            title: "Success",
+            description: "Question updated successfully",
+          });
+
           if (result.data) router.push(ROUTES.QUESTION(result.data._id));
         } else {
-          // toast({
-          //   title: `Error ${result.status}`,
-          //   description: result.error?.message || "Something went wrong",
-          //   variant: "destructive",
-          // });
-          toast("Something went wrong");
+          toast({
+            title: `Error ${result.status}`,
+            description: result.error?.message || "Something went wrong",
+            variant: "destructive",
+          });
         }
+
         return;
       }
 
       const result = await createQuestion(data);
 
       if (result.success) {
-        toast("Question created successfully");
+        toast({
+          title: "Success",
+          description: "Question created successfully",
+        });
 
         if (result.data) router.push(ROUTES.QUESTION(result.data._id));
       } else {
-        // toast({
-        //   title: `Error ${result.status}`,
-        //   description: result.error?.message || "Something went wrong",
-        //   variant: "destructive",
-        // });
-
-        toast("Something went wrong");
+        toast({
+          title: `Error ${result.status}`,
+          description: result.error?.message || "Something went wrong",
+          variant: "destructive",
+        });
       }
     });
   };
@@ -223,6 +229,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
             </FormItem>
           )}
         />
+
         <div className="mt-16 flex justify-end">
           <Button
             type="submit"
