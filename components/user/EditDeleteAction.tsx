@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,8 +17,6 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { deleteAnswer } from "@/lib/actions/answer.action";
 import { deleteQuestion } from "@/lib/actions/question.action";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 interface Props {
   type: string;
