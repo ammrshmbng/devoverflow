@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     }
 
     const { text } = await generateText({
-      model: openai("gpt-4-turbo"),
+      model: openai("gpt-3.5-turbo"),
       prompt: `Generate a markdown-formatted response to the following question: "${question}".  
       
       Consider the provided context:  
