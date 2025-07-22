@@ -64,7 +64,7 @@ const CommonFilter = ({
 
         <SelectContent>
           <SelectGroup>
-            {filters.map((item) => (
+            {filters.map((item: Filter) => (
               <SelectItem key={item.value} value={item.value}>
                 {item.name}
               </SelectItem>
