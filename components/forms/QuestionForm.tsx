@@ -234,7 +234,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
           <Button
             type="submit"
             disabled={isPending}
-            className="primary-gradient w-fit !text-light-900"
+            className="primary-gradient cursor-pointer w-fit !text-light-900"
           >
             {isPending ? (
               <>
