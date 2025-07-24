@@ -66,10 +66,13 @@ const EditDeleteAction = ({ type, itemId }: Props) => {
       )}
 
       <AlertDialog>
+
         <AlertDialogTrigger className="cursor-pointer">
           <Image src="/icons/trash.svg" alt="trash" width={14} height={14} />
         </AlertDialogTrigger>
+
         <AlertDialogContent className="background-light800_dark300">
+
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
@@ -78,6 +81,7 @@ const EditDeleteAction = ({ type, itemId }: Props) => {
               our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
+
           <AlertDialogFooter>
             <AlertDialogCancel className="btn">Cancel</AlertDialogCancel>
             <AlertDialogAction
@@ -87,7 +91,9 @@ const EditDeleteAction = ({ type, itemId }: Props) => {
               Continue
             </AlertDialogAction>
           </AlertDialogFooter>
+
         </AlertDialogContent>
+        
       </AlertDialog>
     </div>
   );
