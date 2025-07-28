@@ -42,7 +42,7 @@ const Page = async ({ searchParams }: RouteParams) => {
       </section>
 
       {jobs?.length > 0 && (
-        <Pagination page={parsedPage} isNext={jobs?.length >= 10} />
+        <Pagination page={parsedPage} isNext={jobs?.length > 10} />
       )}
     </>
   );
