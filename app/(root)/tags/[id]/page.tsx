@@ -21,7 +21,7 @@ const Page = async ({ params, searchParams }: RouteParams) => {
 
   return (
     <>
-      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+      <section>
         <h1 className="h1-bold text-dark100_light900">{tag?.name}</h1>
       </section>
 
