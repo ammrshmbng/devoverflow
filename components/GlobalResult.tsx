@@ -30,7 +30,6 @@ const GlobalResult = () => {
           type,
         });
 
-        console.log(res);
 
         setResult(res.data);
       } catch (error) {
