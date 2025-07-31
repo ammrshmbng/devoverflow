@@ -73,7 +73,6 @@ export async function globalSearch(params: GlobalSearchParams) {
       }));
     }
 
-    console.log(results);
 
     return {
       success: true,
