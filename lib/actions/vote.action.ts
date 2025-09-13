@@ -160,7 +160,7 @@ export async function createVote(
     await session.commitTransaction();
     session.endSession();
 
-    revalidatePath(`/questions/${targetId}`);
+    revalidatePath(`/profile`);
 
     return { success: true };
   } catch (error) {
