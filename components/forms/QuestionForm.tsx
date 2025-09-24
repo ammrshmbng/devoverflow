@@ -82,6 +82,8 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
 
     form.setValue("tags", newTags);
 
+    form.clearErrors("tags");
+
     if (newTags.length === 0) {
       form.setError("tags", {
         type: "manual",
