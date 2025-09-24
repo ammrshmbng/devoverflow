@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 const SocialAuthForm = () => {
   const buttonClass =
-    "background-dark400_light900 body-medium text-dark200_light800 min-h-12 flex-1 rounded-2 px-4 py-3.5";
+    "background-dark400_light900 body-medium text-dark200_light800 min-h-12 flex-1 rounded-2 px-4 py-3.5 cursor-pointer hover:opacity-80 ";
 
   const handleSignIn = async (provider: "github" | "google") => {
     try {
