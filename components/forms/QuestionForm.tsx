@@ -29,6 +29,7 @@ import { Input } from "../ui/input";
 
 const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
+  loading: () => <p>Loading...</p>,
 });
 
 interface Params {
