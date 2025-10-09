@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 interface Props {
   id: string;
   name: string;
-  imageUrl?: string | null;
+  imageUrl?: string | null | undefined;
   className?: string;
   fallbackClassName?: string;
 }
